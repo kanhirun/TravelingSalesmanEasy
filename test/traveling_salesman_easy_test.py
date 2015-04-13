@@ -19,8 +19,6 @@ class TestTravelingSalesmanEasy(TestCase):
 
     nCities = 2
     profit  = [3, 10]
-    lll
-
     city    = [1, 1]
     visits  = [2, 1]
 
