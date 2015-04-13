@@ -2,21 +2,24 @@ class TravelingSalesmanEasy(object):
 
   def getMaxProfit(self, nCities, profit, city, visits):
     totalProfits = 0
-    soldItems    = []  # items which have already been sold 
+    soldItems    = []  # items which have already been sold; closed set
 
-    for visit in visits:
-      for (item, itemCityId) in enumerate(city):
-        if (item in soldItems):
-          continue
+    for visitedCity in visits:
+      soldItem         = -1
+      runningMaxProfit = 0
 
-        soldItem = 0 
-        runningMaxProfit = 0
+      for item, buyingCity in enumerate(city):
+        if (visitedCity == buyingCity):
+          if (item in soldItems):
+            continue
 
-        if (itemCityId == visit) and (profit[item] > runningMaxProfit):
-          soldItem = item 
-          runningMaxProfit = profit[item]
+          if (profit[item] > runningMaxProfit):
+            soldItem         = item
+            runningMaxProfit = profit[item]
 
-      totalProfits += runningMaxProfit
-      soldItems.append(soldItem)
+      if (soldItem != -1):
+        soldItems.append(soldItem)
+        totalProfits += runningMaxProfit
 
     return totalProfits
+
